@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'perfil.dart';
+import 'exercicio.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      home: Perfil(),
+      home: exercicio(),
     ),
   );
 }
