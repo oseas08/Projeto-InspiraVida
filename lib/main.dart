@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'ficha.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      home: Ficha(),
+    ),
+  );
 }
