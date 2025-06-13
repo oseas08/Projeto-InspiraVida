@@ -18,7 +18,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0x000097b2),
+        backgroundColor: Color(0xFF123870),
         body: construirCorpo(),
       ),
     );
@@ -128,13 +128,13 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
           texto: 'Configurações',
           tamanhoFonte: 24.0,
           pesoFonte: FontWeight.w600,
-          cor: Colors.black,
+          cor: Colors.white,
         ),
         SizedBox(height: 8),
         construirTexto(
           texto: 'Personalize sua experiência',
           tamanhoFonte: 14.0,
-          cor: Colors.black54,
+          cor: Colors.white70,
         ),
       ],
     );
@@ -249,7 +249,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey,
+          backgroundColor: Color(0xFF0097b2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
