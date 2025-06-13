@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Ficha extends StatefulWidget {
   const Ficha({super.key});
@@ -14,12 +16,15 @@ class _FichaState extends State<Ficha> {
       child: Scaffold(
         backgroundColor: Color(0xFF49d3ee),
         appBar: AppBar(
-          leading: Icon(Icons.arrow_back_ios),
+          leading: Icon(Icons.arrow_back_ios, color: Colors.black,),
           actions: [
-            Icon(Icons.comment_bank_outlined),
+            Icon(Icons.comment_bank_outlined, color: Colors.black,),
           ],
-          title: Text(
-            "Ficha",
+          title: construirTexto(
+            texto: "Ficha",
+            cor: Colors.black,
+            tamanhoFonte: 20.0,
+            pesoFonte: FontWeight.bold,
           ),
           centerTitle: true,
           backgroundColor: Color(0xFF49d3ee),
@@ -28,7 +33,7 @@ class _FichaState extends State<Ficha> {
         body: Stack(
           children: [
             Align(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.topRight,
               child: Container(
                 width: MediaQuery.of(context).size.width / 3,
                 child: Text(""),
@@ -55,36 +60,84 @@ class _FichaState extends State<Ficha> {
                   children: [
                     Padding(padding: EdgeInsets.all(25)),
                     Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("DADOS DA FICHA AVALIATIVA:")),
+                      alignment: Alignment.center,
+                      child: construirTexto(
+                        texto: "DADOS DA FICHA AVALIATIVA",
+                        cor: Colors.black,
+                        tamanhoFonte: 16.0,
+                        pesoFonte: FontWeight.w600,
+                      ),
+                    ),
                     Padding(padding: EdgeInsets.all(15)),
                     Table(
                       border: TableBorder.all(),
                       defaultVerticalAlignment:
-                          TableCellVerticalAlignment.middle,
+                      TableCellVerticalAlignment.middle,
                       children: <TableRow>[
                         TableRow(
                           children: <Widget>[
                             Container(
-                                height: 32, child: Text("xxnkcdskakdhashkd")),
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Campo 1",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
                             Container(
-                                height: 32, child: Text("xxnkcdskakdhashkd")),
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Valor 1",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
                           ],
                         ),
                         TableRow(
                           children: <Widget>[
                             Container(
-                                height: 32, child: Text("xxnkcdskakdhashkd")),
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Campo 2",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
                             Container(
-                                height: 32, child: Text("xxnkcdskakdhashkd")),
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Valor 2",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
                           ],
                         ),
                         TableRow(
                           children: <Widget>[
                             Container(
-                                height: 32, child: Text("xxnkcdskakdhashkd")),
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Campo 3",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
                             Container(
-                                height: 32, child: Text("xxnkcdskakdhashkd")),
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Valor 3",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -100,26 +153,31 @@ class _FichaState extends State<Ficha> {
                             color: Color(0xFF0097b2),
                             borderRadius: BorderRadius.circular(10)),
                         alignment: Alignment.center,
-                        child: Text(
-                          "Nível de jogabilidade do pulmão: ",
-                          style: TextStyle(fontSize: 18),
-                          textAlign: TextAlign.center,
+                        child: construirTexto(
+                          texto: "Nível de jogabilidade do pulmão: ",
+                          cor: Colors.white,
+                          tamanhoFonte: 18.0,
+                          pesoFonte: FontWeight.w500,
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 300,
+                      height: 230,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                Color(0xFF123870), // background color
+                            Color(0xFF0097b2), // background color
                             foregroundColor: Colors.white, // text color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
+                            ),
+                            textStyle: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           onPressed: () {},
@@ -128,10 +186,14 @@ class _FichaState extends State<Ficha> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                Color(0xFF123870), // background color
+                            Color(0xFF0097b2), // background color
                             foregroundColor: Colors.white, // text color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
+                            ),
+                            textStyle: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           onPressed: () {},
@@ -146,6 +208,23 @@ class _FichaState extends State<Ficha> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget construirTexto({
+    required String texto,
+    Color? cor,
+    double? tamanhoFonte,
+    FontWeight? pesoFonte,
+  }) {
+    return Text(
+      texto,
+      style: GoogleFonts.inter(
+        color: cor ?? Colors.black,
+        fontSize: tamanhoFonte ?? 14.0,
+        fontWeight: pesoFonte ?? FontWeight.normal,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }
