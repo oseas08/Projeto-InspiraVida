@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'questionario.dart';
 import 'ficha.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: Ficha(),
-    ),
-  );
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: QuestionarioPage(),
+  ));
 }

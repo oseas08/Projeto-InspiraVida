@@ -1,8 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Ficha extends StatefulWidget {
+
   const Ficha({super.key});
 
   @override
@@ -79,7 +81,7 @@ class _FichaState extends State<Ficha> {
                             Container(
                               height: 32,
                               child: construirTexto(
-                                texto: "Campo 1",
+                                texto: "1. Tempo para fumar ao acordar: ",
                                 cor: Colors.black,
                                 tamanhoFonte: 14.0,
                                 pesoFonte: FontWeight.normal,
@@ -88,29 +90,7 @@ class _FichaState extends State<Ficha> {
                             Container(
                               height: 32,
                               child: construirTexto(
-                                texto: "Valor 1",
-                                cor: Colors.black,
-                                tamanhoFonte: 14.0,
-                                pesoFonte: FontWeight.normal,
-                              ),
-                            ),
-                          ],
-                        ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              height: 32,
-                              child: construirTexto(
-                                texto: "Campo 2",
-                                cor: Colors.black,
-                                tamanhoFonte: 14.0,
-                                pesoFonte: FontWeight.normal,
-                              ),
-                            ),
-                            Container(
-                              height: 32,
-                              child: construirTexto(
-                                texto: "Valor 2",
+                                texto: "...",
                                 cor: Colors.black,
                                 tamanhoFonte: 14.0,
                                 pesoFonte: FontWeight.normal,
@@ -123,7 +103,7 @@ class _FichaState extends State<Ficha> {
                             Container(
                               height: 32,
                               child: construirTexto(
-                                texto: "Campo 3",
+                                texto: "Fuma em locais proibidos: ",
                                 cor: Colors.black,
                                 tamanhoFonte: 14.0,
                                 pesoFonte: FontWeight.normal,
@@ -132,11 +112,149 @@ class _FichaState extends State<Ficha> {
                             Container(
                               height: 32,
                               child: construirTexto(
-                                texto: "Valor 3",
+                                texto: "...",
                                 cor: Colors.black,
                                 tamanhoFonte: 14.0,
                                 pesoFonte: FontWeight.normal,
                               ),
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: <Widget>[
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Cigarros por dia:",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "...",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: <Widget>[
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Fuma doente:",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "...",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: <Widget>[
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Idade que começou a fumar:",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "...",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: <Widget>[
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Gênero:",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "...",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: <Widget>[
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Atividade física:",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "...",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+
+                            ),
+                          ],
+                        ),
+                        TableRow(
+                          children: <Widget>[
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: "Alimentação:",
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+                            ),
+                            Container(
+                              height: 32,
+                              child: construirTexto(
+                                texto: ("..."),
+                                cor: Colors.black,
+                                tamanhoFonte: 14.0,
+                                pesoFonte: FontWeight.normal,
+                              ),
+
                             ),
                           ],
                         ),
