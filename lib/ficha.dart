@@ -79,20 +79,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
-                                texto: "1. Tempo para fumar ao acordar: ",
+                                texto: "Tempo para fumar ao acordar: ",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "...",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
@@ -101,20 +101,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "Fuma em locais proibidos: ",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "...",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
@@ -123,20 +123,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "Cigarros por dia:",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "...",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
 
@@ -146,20 +146,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "Fuma doente:",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "...",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
 
@@ -169,20 +169,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "Idade que começou a fumar:",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "...",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
 
@@ -192,20 +192,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "Gênero:",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "...",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
 
@@ -215,20 +215,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "Atividade física:",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "...",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
 
@@ -238,20 +238,20 @@ class _FichaState extends State<Ficha> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: "Alimentação:",
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
                             ),
                             Container(
-                              height: 32,
+                              alignment: Alignment.center,
                               child: construirTexto(
                                 texto: ("..."),
                                 cor: Colors.black,
-                                tamanhoFonte: 14.0,
+                                tamanhoFonte: 12.0,
                                 pesoFonte: FontWeight.normal,
                               ),
 
@@ -280,7 +280,7 @@ class _FichaState extends State<Ficha> {
                       ),
                     ),
                     SizedBox(
-                      height: 230,
+                      height: 130,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
