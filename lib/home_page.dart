@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'Sobre.dart';
+
 
 class PaginaConfiguracoes extends StatefulWidget {
   const PaginaConfiguracoes({super.key});
@@ -72,30 +74,63 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
               icone: Icons.language,
               titulo: 'Idioma',
               subtitulo: 'Português (Brasil)',
+              aoToque: () {
+                // Implementar navegação para seleção de idioma
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Função em desenvolvimento')),
+                );
+              },
             ),
             SizedBox(height: 16),
             construirCampoOpcao(
               icone: Icons.privacy_tip,
               titulo: 'Privacidade',
               subtitulo: 'Configurações de privacidade',
+              aoToque: () {
+                // Implementar navegação para privacidade
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Função em desenvolvimento')),
+                );
+              },
             ),
             SizedBox(height: 16),
             construirCampoOpcao(
               icone: Icons.security,
               titulo: 'Segurança',
               subtitulo: 'Autenticação e senha',
+              aoToque: () {
+                // Implementar navegação para segurança
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Função em desenvolvimento')),
+                );
+              },
             ),
             SizedBox(height: 16),
             construirCampoOpcao(
               icone: Icons.help,
               titulo: 'Ajuda',
               subtitulo: 'Central de ajuda e suporte',
+              aoToque: () {
+                // Implementar navegação para ajuda
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Função em desenvolvimento')),
+                );
+              },
             ),
             SizedBox(height: 16),
             construirCampoOpcao(
               icone: Icons.info,
               titulo: 'Sobre',
-              subtitulo: 'Versão 1.0.0',
+              subtitulo: 'Informações do aplicativo',
+              aoToque: () {
+                // Navegar para a tela sobre o aplicativo
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaginaSobreAplicativo(),
+                  ),
+                );
+              },
             ),
             SizedBox(height: 60),
             construirBotaoLogout(),
@@ -196,47 +231,52 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
     required IconData icone,
     required String titulo,
     required String subtitulo,
+    VoidCallback? aoToque,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Row(
-          children: [
-            Icon(
-              icone,
-              color: Colors.black54,
-              size: 24,
-            ),
-            SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  construirTexto(
-                    texto: titulo,
-                    tamanhoFonte: 16.0,
-                    pesoFonte: FontWeight.w500,
-                    cor: Colors.black87,
-                  ),
-                  SizedBox(height: 4),
-                  construirTexto(
-                    texto: subtitulo,
-                    tamanhoFonte: 14.0,
-                    cor: Colors.black54,
-                  ),
-                ],
+    return InkWell(
+      onTap: aoToque,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.8),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Icon(
+                icone,
+                color: Colors.black54,
+                size: 24,
               ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.black54,
-              size: 16,
-            ),
-          ],
+              SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    construirTexto(
+                      texto: titulo,
+                      tamanhoFonte: 16.0,
+                      pesoFonte: FontWeight.w500,
+                      cor: Colors.black87,
+                    ),
+                    SizedBox(height: 4),
+                    construirTexto(
+                      texto: subtitulo,
+                      tamanhoFonte: 14.0,
+                      cor: Colors.black54,
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.black54,
+                size: 16,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -247,7 +287,34 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
       width: double.infinity,
       height: 56,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          // Implementar logout
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Confirmar Logout'),
+                content: Text('Deseja realmente sair da conta?'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text('Cancelar'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      // Aqui você implementaria a lógica de logout
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Logout realizado')),
+                      );
+                    },
+                    child: Text('Sair'),
+                  ),
+                ],
+              );
+            },
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xFF0097b2),
           shape: RoundedRectangleBorder(
