@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Sobre.dart';
-
 
 class PaginaConfiguracoes extends StatefulWidget {
   const PaginaConfiguracoes({super.key});
@@ -75,7 +73,6 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
               titulo: 'Idioma',
               subtitulo: 'Português (Brasil)',
               aoToque: () {
-                // Implementar navegação para seleção de idioma
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Função em desenvolvimento')),
                 );
@@ -87,7 +84,6 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
               titulo: 'Privacidade',
               subtitulo: 'Configurações de privacidade',
               aoToque: () {
-                // Implementar navegação para privacidade
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Função em desenvolvimento')),
                 );
@@ -99,7 +95,6 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
               titulo: 'Segurança',
               subtitulo: 'Autenticação e senha',
               aoToque: () {
-                // Implementar navegação para segurança
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Função em desenvolvimento')),
                 );
@@ -111,7 +106,6 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
               titulo: 'Ajuda',
               subtitulo: 'Central de ajuda e suporte',
               aoToque: () {
-                // Implementar navegação para ajuda
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Função em desenvolvimento')),
                 );
@@ -123,11 +117,10 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
               titulo: 'Sobre',
               subtitulo: 'Informações do aplicativo',
               aoToque: () {
-                // Navegar para a tela sobre o aplicativo
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PaginaSobreAplicativo(),
+                    builder: (context) => PaginaSobre(), // Nome correto da classe
                   ),
                 );
               },
@@ -288,7 +281,6 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
       height: 56,
       child: ElevatedButton(
         onPressed: () {
-          // Implementar logout
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -303,7 +295,6 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      // Aqui você implementaria a lógica de logout
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Logout realizado')),
                       );
