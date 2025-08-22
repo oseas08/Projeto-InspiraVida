@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import '../domain/perfil.dart';
+import '../domain/perfil2.dart';
 import 'db_helper.dart';
 
 class PerfilDao {

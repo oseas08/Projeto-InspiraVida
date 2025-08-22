@@ -30,4 +30,7 @@ class Perfil {
     data['urlImage'] = this.urlImage;
     return data;
   }
+  getnome(){
+    return nome;
+  }
 }
