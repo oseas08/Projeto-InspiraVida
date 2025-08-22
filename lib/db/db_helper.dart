@@ -11,7 +11,7 @@ class DBHelper {
     String dbPath = join(path, dbName);
     Database database = await openDatabase(
       dbPath,
-      version: 1,
+      version: 2,
       onCreate: onCreate,
     );
 
@@ -20,19 +20,19 @@ class DBHelper {
   }
 
   Future<void> onCreate(Database db, int version) async {
-    String sql = '''CREATE TABLE Perfil (
+    String sql = '''CREATE TABLE PERFIL (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome REAL NOT NULL,
-    email REAL,
+    nome TEXT,
+    email TEXT,
     senhaantiga TEXT,
     senhanova TEXT,
     urlImage TEXT
     );''';
 
-    await db.execute("sql");
+    await db.execute(sql);
 
     sql =
-    "INSERT INTO Propriedade (nome, email, senhaantiga, senhaantiga, urlImage) VALUES ('Arthur Castro', 'arthurcastro123@gmail.com', '101010', '102030');";
+    "INSERT INTO PERFIL (nome, email, senhaantiga, senhanova, urlImage) VALUES ('Arthur Castro', 'arthurcastro123@gmail.com', '101010', '102030');";
     await db.execute(sql);
   }
 }

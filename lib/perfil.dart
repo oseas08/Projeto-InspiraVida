@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inspiravida/widgets/card_perfil.dart';
-
 import 'db/perfil_dao.dart';
 
 class Perfil extends StatefulWidget {
@@ -11,6 +10,7 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
+
   List listaPerfils = [];
 
   @override
@@ -34,7 +34,6 @@ class _PerfilState extends State<Perfil> {
           flexibleSpace: Padding(
             padding: EdgeInsets.all(8),
             child: Column(
-
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -62,26 +61,8 @@ class _PerfilState extends State<Perfil> {
                       color: Color(0xFF494949),)
                     )
                   ],
-                )
-              ],
-            ),
-          ),
-        ),
-        body: Container(
-          padding: EdgeInsets.all(24),
-          color: Color(0xFF0097b2),
-          child: ListView(
-              children: [
-          ListView.builder(
-          itemCount: listaPerfils.length,
-              itemBuilder: (context, i) {
-                return CardPerfil(
-                  perfil: listaPerfils[i],
-                );
-              },
-          ),
-
-              SizedBox(
+                ),
+                SizedBox(
                   height: 40,
                   width: 200,
                   child: ElevatedButton(
@@ -101,10 +82,141 @@ class _PerfilState extends State<Perfil> {
                     ),
                   ),
                 ),
-              ]
+
+              ],
+            ),
           ),
         ),
-      ),
+        body: buildBody(),
+    )
     );
   }
+}
+buildBody(){
+  Container(
+      padding: EdgeInsets.all(24),
+      color: Color(0xFF0097b2),
+      child: ListView(
+        children: [
+          ListView.builder(
+          shrinkWrap: true,
+          itemBuilder: (context, i) {
+
+  }
+          ),
+  ]
+  ),
+  );
+  }
+
+buildPerfil(Perfil p){
+  return Container(
+    padding: EdgeInsets.all(24),
+    color: Color(0xFF0097b2),
+    child: ListView(
+        children: [
+          Container(
+            height: 40,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Icon(Icons.person, size: 32),
+                    SizedBox(width: 10),
+                    Text('')
+                  ],
+                ),
+                Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
+                      SizedBox(width: 10)
+                    ]),
+              ],
+            ),
+          ),
+          Container(
+            height: 40,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Icon(Icons.email, size: 32),
+                    SizedBox(width: 10),
+                    Text(perfil.email,
+                        style: TextStyle(
+                          fontSize: 18,
+                        )),
+                  ],
+                ),
+                Row(children: [
+                  IconButton(
+                      onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
+                  SizedBox(width: 10)
+                ])
+              ],
+            ),
+          ),
+          Container(
+            height: 40,
+            color: Colors.white,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Icon(Icons.lock_rounded, size: 32),
+                      SizedBox(width: 10),
+                      Text(perfil.senhaantiga,
+                          style: TextStyle(
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                  Row(children: [
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
+                    SizedBox(width: 10)
+                  ]),
+                ]),
+          ),
+          Container(
+            height: 40,
+            color: Colors.white,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Icon(Icons.lock, size: 32),
+                      SizedBox(width: 10),
+                      Text(perfil.senhanova,
+                          style: TextStyle(
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                  Row(children: [
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
+                    SizedBox(width: 10)
+                  ]
+                  ),
+                ]),
+          ),
+          SizedBox(
+            height: 100,
+          ),
+        ]
+    ),
+  );
+
 }

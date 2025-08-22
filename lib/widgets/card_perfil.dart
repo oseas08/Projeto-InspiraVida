@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../domain/perfil.dart';
+import '../domain/perfil2.dart';
 
 
 class CardPerfil extends StatefulWidget {
