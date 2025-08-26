@@ -5,13 +5,13 @@ import 'package:path/path.dart' as path_helper;
 class DadosApp {
   String versao;
   String dataLancamento;
-  String desenvolvedor;
+  String desenvolvedores;
   String descricao;
 
   DadosApp({
     required this.versao,
     required this.dataLancamento,
-    required this.desenvolvedor,
+    required this.desenvolvedores,
     required this.descricao,
   });
 }
@@ -23,19 +23,20 @@ class BancoDados {
     if (_banco != null) return _banco!;
 
     String caminho = path_helper.join(await getDatabasesPath(), 'app.db');
+    await deleteDatabase(caminho);
 
     _banco = await openDatabase(
       caminho,
       version: 1,
       onCreate: (db, version) async {
         print('Criando banco de dados...');
-        
+
         await db.execute('''
           CREATE TABLE app_info (
             id INTEGER PRIMARY KEY,
             versao TEXT,
             data_lancamento TEXT,
-            desenvolvedor TEXT,
+            desenvolvedores TEXT,
             descricao TEXT
           )
         ''');
@@ -44,10 +45,10 @@ class BancoDados {
           'id': 1,
           'versao': '1.0.0',
           'data_lancamento': '15/01/2024',
-          'desenvolvedor': 'Seu Nome Aqui',
+          'desenvolvedores': 'Seu Nome Aqui',
           'descricao': 'Este é um aplicativo simples feito em Flutter com banco SQLite.'
         });
-        
+
         print('Dados iniciais criados');
       },
     );
@@ -65,7 +66,7 @@ class BancoDados {
         return DadosApp(
           versao: dados['versao'] as String,
           dataLancamento: dados['data_lancamento'] as String,
-          desenvolvedor: dados['desenvolvedor'] as String,
+          desenvolvedores: dados['desenvolvedores'] as String,
           descricao: dados['descricao'] as String,
         );
       }
@@ -74,7 +75,7 @@ class BancoDados {
       return DadosApp(
         versao: '1.0.0',
         dataLancamento: '15/01/2024',
-        desenvolvedor: 'Desenvolvedor',
+        desenvolvedores: 'Desenvolvedor',
         descricao: 'Aplicativo Flutter com SQLite',
       );
     } catch (e) {
@@ -89,7 +90,7 @@ class BancoDados {
       'id': 1,
       'versao': '1.0.0',
       'data_lancamento': '15/01/2024',
-      'desenvolvedor': 'Desenvolvedor',
+      'desenvolvedores': 'Desenvolvedor',
       'descricao': 'Aplicativo Flutter com SQLite',
     });
   }
@@ -97,24 +98,49 @@ class BancoDados {
   static Future<void> salvarDescricao(String novaDescricao) async {
     try {
       final db = await _abrirBanco();
-      
+
       final resultado = await db.query('app_info', where: 'id = ?', whereArgs: [1]);
-      
+
       if (resultado.isEmpty) {
         await _criarDadosPadrao();
       }
-      
+
       await db.update(
         'app_info',
         {'descricao': novaDescricao},
         where: 'id = ?',
         whereArgs: [1],
       );
-      
+
       print('Descrição salva: $novaDescricao');
-      
+
     } catch (e) {
       print('Erro ao salvar: $e');
+      rethrow;
+    }
+  }
+
+  static Future<void> salvarDesenvolvedores(String desenvolvedores) async {
+    try {
+      final db = await _abrirBanco();
+
+      final resultado = await db.query('app_info', where: 'id = ?', whereArgs: [1]);
+
+      if (resultado.isEmpty) {
+        await _criarDadosPadrao();
+      }
+
+      await db.update(
+        'app_info',
+        {'desenvolvedores': desenvolvedores},
+        where: 'id = ?',
+        whereArgs: [1],
+      );
+
+      print('Desenvolvedores salvos: $desenvolvedores');
+
+    } catch (e) {
+      print('Erro ao salvar desenvolvedores: $e');
       rethrow;
     }
   }
@@ -130,7 +156,8 @@ class PaginaSobre extends StatefulWidget {
 class _PaginaSobreState extends State<PaginaSobre> {
   DadosApp? dados;
   bool carregando = true;
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _descricaoController = TextEditingController();
+  final TextEditingController _desenvolvedoresController = TextEditingController();
 
   @override
   void initState() {
@@ -140,16 +167,17 @@ class _PaginaSobreState extends State<PaginaSobre> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _descricaoController.dispose();
+    _desenvolvedoresController.dispose();
     super.dispose();
   }
 
   Future<void> _carregarDados() async {
     try {
       setState(() => carregando = true);
-      
+
       final dadosDoBanco = await BancoDados.buscarDados();
-      
+
       if (mounted) {
         setState(() {
           dados = dadosDoBanco;
@@ -167,14 +195,33 @@ class _PaginaSobreState extends State<PaginaSobre> {
   Future<void> _atualizarDescricao(String novaDescricao) async {
     try {
       await BancoDados.salvarDescricao(novaDescricao);
-      await _carregarDados();
-      
-      if (mounted) {
+
+      if (mounted && dados != null) {
+        setState(() {
+          dados!.descricao = novaDescricao;
+        });
         _mostrarMensagem('Descrição salva com sucesso!');
       }
     } catch (e) {
       if (mounted) {
         _mostrarMensagem('Erro ao salvar: $e', isError: true);
+      }
+    }
+  }
+
+  Future<void> _atualizarDesenvolvedores(String desenvolvedores) async {
+    try {
+      await BancoDados.salvarDesenvolvedores(desenvolvedores);
+
+      if (mounted && dados != null) {
+        setState(() {
+          dados!.desenvolvedores = desenvolvedores;
+        });
+        _mostrarMensagem('Desenvolvedores salvos com sucesso!');
+      }
+    } catch (e) {
+      if (mounted) {
+        _mostrarMensagem('Erro ao salvar desenvolvedores: $e', isError: true);
       }
     }
   }
@@ -191,181 +238,223 @@ class _PaginaSobreState extends State<PaginaSobre> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF123870),
-      appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: const Color(0xFF123870),
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-        ),
-        centerTitle: true,
-        title: const Text(
-          'Sobre o App',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        body: construirCorpo(),
+      ),
+    );
+  }
+
+  construirCorpo() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            construirCabecalhoSobre(),
+            const SizedBox(height: 40),
+
+            if (carregando)
+              const Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              )
+            else ...[
+              _criarCard('Versão', dados?.versao ?? '', Icons.info),
+              const SizedBox(height: 16),
+
+              _criarCard('Data de Lançamento', dados?.dataLancamento ?? '', Icons.calendar_today),
+              const SizedBox(height: 16),
+
+              _criarCardEditavel('Desenvolvedores', dados?.desenvolvedores ?? '', Icons.person, _abrirDialogEdicaoDesenvolvedores),
+              const SizedBox(height: 16),
+
+              _criarCardEditavel('Descrição', dados?.descricao ?? '', Icons.description, _abrirDialogEdicaoDescricao),
+
+              const SizedBox(height: 40),
+
+              construirBotaoConfiguracoes(),
+              const SizedBox(height: 40),
+            ],
+          ],
         ),
       ),
-      body: carregando 
-        ? const Center(
-            child: CircularProgressIndicator(color: Colors.white),
-          )
-        : SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
+    );
+  }
 
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFF0277BD),
-                  ),
-                  child: const Icon(Icons.info, size: 40, color: Colors.white),
-                ),
-                
-                const SizedBox(height: 20),
-                
-                const Text(
-                  'Informações do App',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                
-                const SizedBox(height: 30),
-                
-                _criarCard('Versão', dados?.versao ?? '', Icons.info),
-                const SizedBox(height: 15),
-                
-                _criarCard('Data de Lançamento', dados?.dataLancamento ?? '', Icons.calendar_today),
-                const SizedBox(height: 15),
-                
-                _criarCard('Desenvolvedor', dados?.desenvolvedor ?? '', Icons.person),
-                const SizedBox(height: 15),
-                
-                _criarCardDescricao(),
-                
-                const SizedBox(height: 30),
-                
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: ElevatedButton.icon(
-                    onPressed: _carregarDados,
-                    icon: const Icon(Icons.refresh),
-                    label: const Text('Recarregar Dados'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0277BD),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+  construirCabecalhoSobre() {
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        Container(
+          width: 80,
+          height: 80,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Color(0xFF0277BD),
           ),
+          child: const Icon(
+            Icons.info,
+            size: 40,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          'Sobre o App',
+          style: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          'Informações do aplicativo',
+          style: TextStyle(
+            fontSize: 14.0,
+            color: Colors.white70,
+          ),
+        ),
+      ],
     );
   }
 
   Widget _criarCard(String titulo, String valor, IconData icone) {
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
-        borderRadius: BorderRadius.circular(10),
+        color: Colors.white.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        children: [
-          Icon(icone, color: const Color(0xFF123870), size: 24),
-          const SizedBox(width: 15),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  titulo,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF123870),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  valor,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black87,
-                  ),
-                ),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Icon(
+              icone,
+              color: Colors.black54,
+              size: 24,
             ),
-          ),
-        ],
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    titulo,
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    valor,
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _criarCardDescricao() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+  Widget _criarCardEditavel(String titulo, String valor, IconData icone, VoidCallback onEdit) {
+    return InkWell(
+      onTap: onEdit,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.8),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
             children: [
-              const Icon(Icons.description, color: Color(0xFF123870), size: 24),
-              const SizedBox(width: 15),
-              const Expanded(
-                child: Text(
-                  'Descrição',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF123870),
-                  ),
+              Icon(
+                icone,
+                color: Colors.black54,
+                size: 24,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      titulo,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      valor,
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              IconButton(
-                onPressed: _abrirDialogEdicao,
-                icon: const Icon(Icons.edit, color: Color(0xFF0277BD), size: 20),
+              const Icon(
+                Icons.edit,
+                color: Colors.black54,
+                size: 20,
               ),
             ],
           ),
-          const SizedBox(height: 8),
-          Text(
-            dados?.descricao ?? '',
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.black87,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  void _abrirDialogEdicao() {
-    _controller.text = dados?.descricao ?? '';
+  construirBotaoConfiguracoes() {
+    return Container(
+      width: double.infinity,
+      height: 56,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context); // Volta para a tela anterior (configurações)
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF0097b2),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 0,
+        ),
+        child: const Text(
+          'Voltar às Configurações',
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _abrirDialogEdicaoDescricao() {
+    _descricaoController.text = dados?.descricao ?? '';
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Editar Descrição'),
         content: TextField(
-          controller: _controller,
+          controller: _descricaoController,
           maxLines: 3,
           decoration: const InputDecoration(
             hintText: 'Digite a nova descrição...',
@@ -377,20 +466,55 @@ class _PaginaSobreState extends State<PaginaSobre> {
             onPressed: () => Navigator.pop(context),
             child: const Text('Cancelar'),
           ),
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
-              final texto = _controller.text.trim();
+              final texto = _descricaoController.text.trim();
               if (texto.isNotEmpty) {
                 _atualizarDescricao(texto);
               } else {
                 _mostrarMensagem('Descrição não pode estar vazia', isError: true);
               }
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0277BD),
-            ),
-            child: const Text('Salvar', style: TextStyle(color: Colors.white)),
+            child: const Text('Salvar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _abrirDialogEdicaoDesenvolvedores() {
+    _desenvolvedoresController.text = dados?.desenvolvedores ?? '';
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Editar Desenvolvedores'),
+        content: TextField(
+          controller: _desenvolvedoresController,
+          maxLines: 2,
+          decoration: const InputDecoration(
+            hintText: 'Ex: João Silva, Maria Santos, Pedro Costa',
+            labelText: 'Desenvolvedores (separados por vírgula)',
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              final texto = _desenvolvedoresController.text.trim();
+              if (texto.isNotEmpty) {
+                _atualizarDesenvolvedores(texto);
+              } else {
+                _mostrarMensagem('Campo desenvolvedores não pode estar vazio', isError: true);
+              }
+            },
+            child: const Text('Salvar'),
           ),
         ],
       ),
