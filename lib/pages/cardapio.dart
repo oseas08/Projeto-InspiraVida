@@ -66,15 +66,21 @@ class _CardapioState extends State<Cardapio> {
           ),
           SizedBox(height: 50,),
           SizedBox(
-            height: 800,
+            height: 700,
             width: double.infinity,
-            child: ListView.builder(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 5,
+                childAspectRatio: 0.8
+              ),
               itemBuilder: (context, i){
                 return Cardcomida(comida: listaComidas[i]);
               },
-              itemCount: listaComidas.length,
-            )
-          )
+              itemCount: listaComidas.length,),
+          ),
+          SizedBox(height: 100,)
         ],
       ),
     );

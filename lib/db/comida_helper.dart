@@ -28,11 +28,23 @@ class ComidaHelper {
     );''';
     await db.execute(sql);
 
-    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse de Chocolate', 'Um mousse feito de chocolate, é meio óbvio');";
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
     await db.execute(sql);
-    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse de Chocolate', 'Um mousse feito de chocolate, é meio óbvio');";
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
     await db.execute(sql);
-    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse de Chocolate', 'Um mousse feito de chocolate, é meio óbvio');";
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
+    await db.execute(sql);
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
+    await db.execute(sql);
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
+    await db.execute(sql);
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
+    await db.execute(sql);
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
+    await db.execute(sql);
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
+    await db.execute(sql);
+    sql = "INSERT INTO COMIDA (pathImage, nome, descricao) VALUES ('assets/mousse.png', 'Mousse', 'Um mousse feito de chocolate, é meio óbvio');";
     await db.execute(sql);
   }
 }

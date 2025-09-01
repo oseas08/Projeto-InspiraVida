@@ -19,13 +19,19 @@ class _CardcomidaState extends State<Cardcomida> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5),
       width: 200,
-      height: 350,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),border: Border.all(color: Color(0xFFd3e0ed),width: 2.0)),
+      height: 400,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),border: Border.all(color: Color(0xFFd3e0ed),width: 2.0)),
       child: Column(
         children: [
           Image.asset(comida.pathImage),
-          Text(comida.nome),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(comida.nome, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+            ],
+          ),
           Text(comida.descricao)
         ],
       ),
