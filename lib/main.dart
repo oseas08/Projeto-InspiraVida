@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'receita.dart'; // Importa a nossa nova tela de receitas
+import 'package:inspiravida/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto', // Fonte padrão para o corpo do texto
       ),
       // A tela inicial agora é o widget que está no arquivo receitas.dart
-      home: const RecipeScreen(),
+      home: HomePage(),
     );
   }
 }
