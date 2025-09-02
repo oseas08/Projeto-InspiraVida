@@ -52,14 +52,14 @@ class _CardapioState extends State<Cardapio> {
                 width: 100,
                 height: 40,
                 child: ElevatedButton(
-                  onPressed: (){}, child: Text("Geral", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF0A1931)),
+                  onPressed: (){}, child: Text("Fitness", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF0A1931)),
                 ),
               ),
               SizedBox(
-                width: 100,
+                width: 110,
                 height: 40,
                 child: ElevatedButton(
-                  onPressed: (){}, child: Text("Geral", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF0A1931)),
+                  onPressed: (){}, child: Text("Caseiras", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF0A1931)),
                 ),
               )
             ],
