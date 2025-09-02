@@ -39,10 +39,10 @@ class _HomePageState extends State<HomePage> {
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.abc), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Configuração'),
-            BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Ficha'),
-            BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Exercício')
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Configuração'),
+            BottomNavigationBarItem(icon: Icon(Icons.table_chart), label: 'Ficha'),
+            BottomNavigationBarItem(icon: Icon(Icons.on_device_training), label: 'Exercício')
           ],
         ),
       ),
@@ -52,9 +52,9 @@ class _HomePageState extends State<HomePage> {
   buildAppBar(){
     return AppBar(
       actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.abc))
+        IconButton(onPressed: (){}, icon: Icon(Icons.menu))
       ],
-      leading: IconButton(onPressed: (){}, icon: Icon(Icons.abc)),
+      leading: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios)),
     );
   }
 }
