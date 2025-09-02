@@ -1,11 +1,11 @@
-class Perfil {
+class Perfil2 {
   late String nome;
   late String email;
   late String senhaantiga;
   late String senhanova;
   late String urlImage;
 
-  Perfil({
+  Perfil2({
     required this.nome,
     required this.email,
     required this.senhaantiga,
@@ -13,7 +13,7 @@ class Perfil {
     required this.urlImage,
   });
 
-  Perfil.fromJson(Map<String, dynamic> json) {
+  Perfil2.fromJson(Map<String, dynamic> json) {
     nome = json['nome'];
     email = json['email'];
     senhaantiga = json['senhaantiga'];

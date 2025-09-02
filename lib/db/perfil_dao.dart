@@ -3,18 +3,15 @@ import '../domain/perfil2.dart';
 import 'db_helper.dart';
 
 class PerfilDao {
-  Future<List<Perfil>> listarPerfil() async {
+  Future<List<Perfil2>> listarPerfil() async {
     Database db = await DBHelper().initDB();
     String sql = 'SELECT * FROM Perfil;';
     var result = await db.rawQuery(sql);
 
-    List<Perfil> listaPerfil = [];
+    List<Perfil2> listaPerfil = [];
 
-    await Future.delayed(Duration(seconds: 3));
-
-    // ForEach
     for (var json in result) {
-      Perfil perfil = Perfil.fromJson(json);
+      Perfil2 perfil = Perfil2.fromJson(json);
       listaPerfil.add(perfil);
     }
 

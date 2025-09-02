@@ -7,18 +7,16 @@ class DBHelper {
     String path = await getDatabasesPath();
     String dbName = 'perfil.db';
 
-    // C:/aqrquivos/jkdahsdja/perfil.db
     String dbPath = join(path, dbName);
     Database database = await openDatabase(
       dbPath,
-      version: 2,
+      version: 1,
       onCreate: onCreate,
     );
 
     print(dbPath);
     return database;
   }
-
   Future<void> onCreate(Database db, int version) async {
     String sql = '''CREATE TABLE PERFIL (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,11 +26,9 @@ class DBHelper {
     senhanova TEXT,
     urlImage TEXT
     );''';
-
     await db.execute(sql);
-
     sql =
-    "INSERT INTO PERFIL (nome, email, senhaantiga, senhanova, urlImage) VALUES ('Arthur Castro', 'arthurcastro123@gmail.com', '101010', '102030');";
+    "INSERT INTO PERFIL (nome, email, senhaantiga, senhanova, urlImage) VALUES ('Arthur Castro', 'arthurcastro123@gmail.com', '101010', '102030', '');";
     await db.execute(sql);
   }
 }

@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 import '../domain/perfil2.dart';
 
-
 class CardPerfil extends StatefulWidget {
-  Perfil perfil;
+  final Perfil2 perfil;
 
-  CardPerfil({
-    required this.perfil,
-    super.key,
-  });
+  const CardPerfil({Key? key, required this.perfil}) : super(key: key);
 
   @override
   State<CardPerfil> createState() => _CardPerfilState();
 }
 
 class _CardPerfilState extends State<CardPerfil> {
-  Perfil get perfil => widget.perfil;
+  Perfil2 get perfil => widget.perfil;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(24),
+      padding: EdgeInsets.all(12),
       color: Color(0xFF0097b2),
       child: ListView(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           children: [
             Container(
-              height: 40,
               color: Colors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,42 +38,35 @@ class _CardPerfilState extends State<CardPerfil> {
                           )),
                     ],
                   ),
-                  Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
-                        SizedBox(width: 10)
-                      ]),
-                ],
-              ),
-            ),
-            Container(
-              height: 40,
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Icon(Icons.email, size: 32),
-                      SizedBox(width: 10),
-                      Text(perfil.email,
-                          style: TextStyle(
-                            fontSize: 18,
-                          )),
-                    ],
-                  ),
                   Row(children: [
                     IconButton(
                         onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
                     SizedBox(width: 10)
-                  ])
+                  ]),
                 ],
               ),
             ),
             Container(
-              height: 40,
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 10),
+                  Icon(Icons.email, size: 32),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(perfil.email,
+                        style: TextStyle(
+                          fontSize: 18,
+                        )),
+                  ),
+                  IconButton(
+                      onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
+                  SizedBox(width: 10)
+                ],
+              ),
+            ),
+            Container(
               color: Colors.white,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +90,6 @@ class _CardPerfilState extends State<CardPerfil> {
                   ]),
             ),
             Container(
-              height: 40,
               color: Colors.white,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,15 +109,13 @@ class _CardPerfilState extends State<CardPerfil> {
                       IconButton(
                           onPressed: () {}, icon: Icon(Icons.edit, size: 32)),
                       SizedBox(width: 10)
-                    ]
-                    ),
+                    ]),
                   ]),
             ),
             SizedBox(
               height: 100,
             ),
-          ]
-      ),
+          ]),
     );
   }
 }
