@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart' as path_helper;
+import 'PaginaPerfil.dart';
 import 'Sobre.dart';
 
 class PaginaConfiguracoes extends StatefulWidget {
@@ -120,7 +122,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PaginaSobre(), // Nome correto da classe
+                    builder: (context) => PaginaSobre(),
                   ),
                 );
               },
@@ -138,19 +140,68 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
     return Column(
       children: [
         SizedBox(height: 20),
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Color(0xFF0277BD),
-          ),
-          child: Icon(
-            Icons.settings,
-            size: 40,
-            color: Colors.white,
+
+
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaginaPerfil(),
+              ),
+            );
+          },
+          child: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(0xFF0277BD),
+            ),
+            child: Icon(
+              Icons.settings,
+              size: 40,
+              color: Colors.white,
+            ),
           ),
         ),
+
+        SizedBox(height: 8),
+
+
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaginaPerfil(),
+              ),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.person, color: Colors.white, size: 16),
+                SizedBox(width: 6),
+                Text(
+                  'Ver Perfil',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
         SizedBox(height: 16),
         construirTexto(
           texto: 'Configurações',
@@ -212,7 +263,7 @@ class _PaginaConfiguracoesState extends State<PaginaConfiguracoes> {
             Switch(
               value: valor,
               onChanged: aoMudar,
-              activeColor: Colors.grey,
+              activeColor: Color(0xFF0277BD),
             ),
           ],
         ),

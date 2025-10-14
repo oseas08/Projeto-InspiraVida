@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path_helper;
+import 'PaginaPerfil.dart';
+
 
 class DadosApp {
   String versao;
@@ -519,5 +521,6 @@ class _PaginaSobreState extends State<PaginaSobre> {
         ],
       ),
     );
+
   }
 }
