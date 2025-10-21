@@ -19,39 +19,27 @@ class _exercicioState extends State<exercicio> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                   margin: EdgeInsets.all(30.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Color(0xFF031633), 
+                    color: Color(0xFF031633),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              ClipRRect(
-                                child: Image.asset(''),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                      Text('data do aniversário da Arielly está chegando',
+                      style: TextStyle(color: Colors.white),)
                     ],
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
+                      ),
       ),
-    );
+                  ],
+        ),
+            ]
+        ),
+        ),
+      );
   }
 }
 
