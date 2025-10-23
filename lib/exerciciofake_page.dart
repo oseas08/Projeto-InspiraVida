@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:inspiravida/api/exercicio_api.dart';
 import 'package:inspiravida/exercicio.dart';
 
-class ExercicioPage extends StatefulWidget {
-  const ExercicioPage({super.key});
+class ExercicioPageFake extends StatefulWidget {
+  const ExercicioPageFake({super.key});
 
   @override
-  State<ExercicioPage> createState() => _ExercicioPageState();
+  State<ExercicioPageFake> createState() => _ExercicioPageFakeState();
 }
 
-class _ExercicioPageState extends State<ExercicioPage> {
-  late Future<List<Exercicio>> futureExercicios;
+class _ExercicioPageFakeState extends State<ExercicioPageFake> {
   late Future<List<Exercicio>> futureExerciciosFake;
 
   @override
   void initState() {
     super.initState();
-    futureExercicios = ExercicioApi().findExercicios();
     futureExerciciosFake = ExercicioApi().findExerciciosFake();
   }
 
@@ -25,27 +23,27 @@ class _ExercicioPageState extends State<ExercicioPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: buildAppbar(),
-          body: FutureBuilder(
-            future: futureExercicios,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(child: Text("Um erro aconteceu!"));
-              }
+        appBar: buildAppbar(),
+        body: FutureBuilder(
+          future: futureExerciciosFake,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text("Um erro aconteceu!"));
+            }
 
-              if (snapshot.hasData) {
-                List<Exercicio> exercicios = snapshot.requireData;
-                return ListView.builder(
-                  itemCount: exercicios.length,
-                  itemBuilder: (context, i) {
-                    return buildCard(exercicios[i]);
-                  },
-                );
-              }
+            if (snapshot.hasData) {
+              List<Exercicio> exercicios = snapshot.requireData;
+              return ListView.builder(
+                itemCount: exercicios.length,
+                itemBuilder: (context, i) {
+                  return buildCard(exercicios[i]);
+                },
+              );
+            }
 
-              return Center(child: CircularProgressIndicator());
-            },
-          ),
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:inspiravida/exercicio.dart';
 class ExercicioApi {
   final dio = Dio();
   String baseUrl = 'https://api.api-ninjas.com/v1';
+  String baseUrlFakeApi = 'https://my-json-server.typicode.com/Rubia15/fake-api-rubia';
 
   Future<List<Exercicio>> findExercicios() async {
     List<Exercicio> lista = [];
@@ -20,6 +21,20 @@ class ExercicioApi {
     for(var json in response.data){
       Exercicio exercicio = Exercicio.fromJson(json);
       lista.add(exercicio);
+    }
+
+    return lista;
+  }
+
+  Future<List<Exercicio>> findExerciciosFake() async {
+    List<Exercicio> lista = [];
+    final response = await dio.get('${baseUrlFakeApi}/exercicios');
+
+    if(response.statusCode == 200){
+      for(var json in response.data){
+        Exercicio exercicio = Exercicio.fromJson(json);
+        lista.add(exercicio);
+      }
     }
 
     return lista;
