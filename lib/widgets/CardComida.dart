@@ -25,7 +25,7 @@ class _CardcomidaState extends State<Cardcomida> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),border: Border.all(color: Color(0xFFd3e0ed),width: 2.0)),
       child: Column(
         children: [
-          Image.asset(comida.pathImage),
+          Image.network(comida.pathImage),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
