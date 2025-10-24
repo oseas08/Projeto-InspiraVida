@@ -108,6 +108,7 @@ buildCard(Exercicio exercicio) {
               ),
             ],
           ),
+
   child:
   Text(
           exercicio.instructions,
