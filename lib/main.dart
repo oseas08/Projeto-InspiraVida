@@ -5,7 +5,7 @@ import 'exercicio_page.dart';
 void main() {
   runApp(
     MaterialApp(
-      home: ExercicioPageFake(),
+      home: ExercicioPage(),
     ),
   );
 }

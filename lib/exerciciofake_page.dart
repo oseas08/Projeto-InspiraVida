@@ -1,23 +1,29 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inspiravida/api/exercicio_api.dart';
 import 'package:inspiravida/exercicio.dart';
 
+
 class ExercicioPageFake extends StatefulWidget {
   const ExercicioPageFake({super.key});
+
 
   @override
   State<ExercicioPageFake> createState() => _ExercicioPageFakeState();
 }
 
+
 class _ExercicioPageFakeState extends State<ExercicioPageFake> {
   late Future<List<Exercicio>> futureExerciciosFake;
+
 
   @override
   void initState() {
     super.initState();
     futureExerciciosFake = ExercicioApi().findExerciciosFake();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +37,7 @@ class _ExercicioPageFakeState extends State<ExercicioPageFake> {
               return Center(child: Text("Um erro aconteceu!"));
             }
 
+
             if (snapshot.hasData) {
               List<Exercicio> exercicios = snapshot.requireData;
               return ListView.builder(
@@ -41,6 +48,7 @@ class _ExercicioPageFakeState extends State<ExercicioPageFake> {
               );
             }
 
+
             return Center(child: CircularProgressIndicator());
           },
         ),
@@ -48,6 +56,7 @@ class _ExercicioPageFakeState extends State<ExercicioPageFake> {
     );
   }
 }
+
 
 buildCard(Exercicio exercicio) {
   return Container(
@@ -65,6 +74,7 @@ buildCard(Exercicio exercicio) {
           style: TextStyle(color: Colors.white),
         ),
 
+
         Text(
           exercicio.name,
           style: TextStyle(color: Colors.white),
@@ -81,6 +91,7 @@ buildCard(Exercicio exercicio) {
     ),
   );
 }
+
 
 buildAppbar() {
   return AppBar(
