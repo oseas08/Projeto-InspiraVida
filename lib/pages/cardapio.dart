@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inspiravida/db/comida_dao.dart';
+import 'package:inspiravida/domain/Comida.dart';
 import 'package:inspiravida/widgets/CardComida.dart';
+
+import '../api/comida_api.dart';
 
 class Cardapio extends StatefulWidget {
   const Cardapio({super.key});
@@ -11,7 +14,8 @@ class Cardapio extends StatefulWidget {
 
 class _CardapioState extends State<Cardapio> {
 
-  List listaComidas = [];
+  late Future<List<Comida>> listaComidas;
+
 
   void initState() {
     super.initState();
@@ -19,7 +23,7 @@ class _CardapioState extends State<Cardapio> {
   }
 
   loadData() async {
-    listaComidas = await ComidaDao().listarComidas();
+    listaComidas = ComidaApi().getAll();
     setState(() {});
   }
 
@@ -68,21 +72,35 @@ class _CardapioState extends State<Cardapio> {
           SizedBox(
             height: 700,
             width: double.infinity,
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 5,
-                childAspectRatio: 0.8
-              ),
-              itemBuilder: (context, i){
-                return Cardcomida(comida: listaComidas[i]);
+            child: FutureBuilder<List<Comida>>(
+              future: listaComidas,
+              builder: (context, snapshot){
+                if (snapshot.hasData) {
+                  List<Comida> lista = snapshot.requireData;
+                  return buildGridView(lista);
+                }
+
+                return Center(child: CircularProgressIndicator());
               },
-              itemCount: listaComidas.length,),
+            ),
           ),
           SizedBox(height: 100,)
         ],
       ),
     );
+  }
+
+  buildGridView(List<Comida> listaComidas){
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 5,
+          childAspectRatio: 0.8
+      ),
+      itemBuilder: (context, i){
+        return Cardcomida(comida: listaComidas[i]);
+      },
+      itemCount: listaComidas.length,);
   }
 }
