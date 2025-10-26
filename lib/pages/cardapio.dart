@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:inspiravida/db/comida_dao.dart';
+import 'package:inspiravida/api/comida_api.dart';
 import 'package:inspiravida/domain/Comida.dart';
+import 'package:inspiravida/domain/Comida_api_verdadeira.dart';
 import 'package:inspiravida/widgets/CardComida.dart';
-
-import '../api/comida_api.dart';
 
 class Cardapio extends StatefulWidget {
   const Cardapio({super.key});
@@ -13,94 +12,132 @@ class Cardapio extends StatefulWidget {
 }
 
 class _CardapioState extends State<Cardapio> {
-
   late Future<List<Comida>> listaComidas;
+  late Future<List<Items>> listaItems;
 
-
+  @override
   void initState() {
     super.initState();
     loadData();
   }
 
-  loadData() async {
-    listaComidas = ComidaApi().getAll();
+  void loadData() {
+    listaComidas = ComidaApiFake().getAll();
+    listaItems = ComidaApi().getAll();
     setState(() {});
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: ListView(
+        physics: AlwaysScrollableScrollPhysics(),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("OPÇÕES\n DE COMIDA",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
-              IconButton(onPressed: (){}, icon: Icon(Icons.search_rounded, size: 40,))
+              Text(
+                "OPÇÕES\n DE COMIDA",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.search_rounded, size: 40),
+              ),
             ],
           ),
-          SizedBox(height: 10,),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 100,
-                height: 40,
-                child: ElevatedButton(
-                    onPressed: (){}, child: Text("Geral", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF0A1931)),
-                ),
-              ),
-              SizedBox(
-                width: 100,
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: (){}, child: Text("Fitness", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF0A1931)),
-                ),
-              ),
-              SizedBox(
-                width: 110,
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: (){}, child: Text("Caseiras", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF0A1931)),
-                ),
-              )
+              _buildFilterButton("Geral"),
+              _buildFilterButton("Fitness"),
+              _buildFilterButton("Caseiras"),
             ],
           ),
-          SizedBox(height: 50,),
+          SizedBox(height: 30),
+          Text(
+            "Comidas Locais",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
+          SizedBox(height: 10),
           SizedBox(
-            height: 700,
-            width: double.infinity,
+            height: 400,
             child: FutureBuilder<List<Comida>>(
               future: listaComidas,
-              builder: (context, snapshot){
-                if (snapshot.hasData) {
-                  List<Comida> lista = snapshot.requireData;
-                  return buildGridView(lista);
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text("Erro: ${snapshot.error}"));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(child: Text("Nenhum prato encontrado."));
                 }
 
-                return Center(child: CircularProgressIndicator());
+                List<Comida> lista = snapshot.data!;
+                return buildHorizontalList(lista);
               },
             ),
           ),
-          SizedBox(height: 100,)
+          SizedBox(height: 30),
+          Text(
+            "Pratos da Api real",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 400,
+            child: FutureBuilder<List<Items>>(
+              future: listaItems,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text("Erro: ${snapshot.error}"));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(child: Text("Nenhum prato encontrado."));
+                }
+
+                List<Items> lista = snapshot.data!;
+                return buildHorizontalList(lista);
+              },
+            ),
+          ),
+          SizedBox(height: 80),
         ],
       ),
     );
   }
 
-  buildGridView(List<Comida> listaComidas){
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 5,
-          childAspectRatio: 0.8
+  Widget buildHorizontalList(List<dynamic> lista) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: lista.map((item) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Cardcomida(comida: item),
+          );
+        }).toList(),
       ),
-      itemBuilder: (context, i){
-        return Cardcomida(comida: listaComidas[i]);
-      },
-      itemCount: listaComidas.length,);
+    );
+  }
+
+  Widget _buildFilterButton(String label) {
+    return SizedBox(
+      width: 100,
+      height: 40,
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF0A1931),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        child: Text(label, style: const TextStyle(color: Colors.white)),
+      ),
+    );
   }
 }

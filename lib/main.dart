@@ -15,9 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'Roboto', // Fonte padrão para o corpo do texto
+        fontFamily: 'Roboto',
       ),
-      // A tela inicial agora é o widget que está no arquivo receitas.dart
       home: HomePage(),
     );
   }
