@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:inspiravida/pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'providers/health_provider.dart';
+import 'screens/add_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => HealthProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,13 +18,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Receita de Mousse',
+      title: 'Saúde & Fitness',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Roboto',
+        primaryColor: const Color(0xFF031633),
+        scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+        useMaterial3: true,
       ),
-      home: HomePage(),
+      home: const AddScreen(),
     );
   }
 }
