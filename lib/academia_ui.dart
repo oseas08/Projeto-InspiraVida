@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+
 class AppColors {
   static const primary = Color(0xFF0B1E3B);
   static const accent = Color(0xFF00E676);
@@ -87,37 +88,37 @@ const List<Gym> _gyms = [
       id: '1',
       name: 'Academia Smart Fit - Arapiraca',
       category: 'Musculação • Bodybuilding',
-      address: 'Brasília, Brazil',//'R. São João, 351 - Caititus, Arapiraca - AL, 57312-265',
+      address: 'R. São João, 351 - Caititus, Arapiraca - AL, 57312-265',
       imageUrl: 'https://lh3.googleusercontent.com/p/AF1QipN3f1c_t246DqcJITAmnPoSV8KHg_ehDftlRyN-=w426-h240-k-no',
-      rating: 4.8,
+      rating: 4.7,
       distance: '0.5 km',
       isOpen: true
   ),
   Gym(
       id: '2',
-      name: 'Arena Cross',
-      category: 'Crossfit • Funcional',
-      address: 'Rua Funchal, 200 - Vila Olímpia',
-      imageUrl: 'https://placehold.co/600x400/0B1E3B/00E676.png?text=Crossfit',
-      rating: 4.7,
+      name: 'Selfit Academias Arapiraca',
+      category: 'Musculação',
+      address: 'Av. Deputada Ceci Cunha, 08 - Itapoá, Arapiraca - AL, 57314-105',
+      imageUrl: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyCvgRJXZ2rvjkdg2MLRAlv52JKPs5couaeuIxBQjS0Pw9Vi1GG4zJhUF2-YdY07CnTed40oFsJ-2XifRio0mcA_R6iNsFH9DuTTQ8nB0xJhRZMkFTsVXkC2lzCnN49RllsKRD9Mw=w408-h544-k-no',
+      rating: 4.8,
       distance: '1.8 km',
       isOpen: true),
   Gym(
       id: '3',
-      name: 'Zen Blue Yoga',
-      category: 'Yoga • Pilates',
-      address: 'Rua Oscar Freire, 550 - Jardins',
-      imageUrl: 'https://placehold.co/600x400/0B1E3B/00E676.png?text=Yoga',
-      rating: 4.8,
+      name: 'CentralFit',
+      category: 'Musculação',
+      address: 'R. Ver. Domingos Vital - Alto do Cruzeiro, Arapiraca - AL, 57312-250',
+      imageUrl: 'https://lh3.googleusercontent.com/p/AF1QipME4a5aPOHDfH0idjJXEwC8bVzAiOlXJ8cPpLR_=w430-h240-k-no',
+      rating: 4.5,
       distance: '3.2 km',
       isOpen: false),
   Gym(
       id: '4',
-      name: 'Aqua Center',
-      category: 'Natação • Hidro',
-      address: 'Av. Brigadeiro Faria Lima, 3000',
-      imageUrl: 'https://placehold.co/600x400/0B1E3B/00E676.png?text=Pool',
-      rating: 4.5,
+      name: 'X7 Academia',
+      category: 'Musculação',
+      address: 'Jardim Tropical, Arapiraca - AL, 57316-065',
+      imageUrl: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzEsNLYNcfIGzLl8rdMRcwWr-_VBcsCmSWxnIUbAv9UFdwjONfRgJrhEfkWKLOqamR9O2SGuLH5u_kqOcuz4goAlm4QBUkMY-N1zVNaJniW-amG5VAbIMOIwQ6HSHe82aeF5NJaI24ga-lA=w408-h408-k-no',
+      rating: 4.7,
       distance: '4.0 km',
       isOpen: true),
 ];
