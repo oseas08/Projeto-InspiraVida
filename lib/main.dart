@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inspiravida/exerciciofake_page.dart';
-import 'exercicio_page.dart';
-
+import 'package:inspiravida/restaurante.dart';
+//import 'package:inspiravida/exerciciofake_page.dart';
 void main() {
-  runApp(
-    MaterialApp(
-      home: ExercicioPage(),
-    ),
-  );
+  runApp(const RestauranteApp());
 }
